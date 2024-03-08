@@ -1,3 +1,3 @@
-# truffle-init-bare
+# ETH To Do List Project
 
-Barebones Truffle project.
+Exploring solidity
