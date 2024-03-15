@@ -17,7 +17,6 @@ App = {
                 App.web3Provider = window.ethereum;
                 window.web3 = new Web3(window.ethereum);
                 App.account = accounts[0];
-                console.log(App.account);
             } catch (error) {
                 // User denied account access...
                 console.error("User denied account access");
@@ -35,6 +34,7 @@ App = {
 
         // Hydrate the smart contract with values from the blockchain
         App.todoList = await App.contracts.TodoList.deployed()
+        console.log("App.todoList: ")
         console.log(App.todoList)
     },
 
@@ -60,15 +60,15 @@ App = {
         const loader = $('#loader')
         const content = $('#content')
         if (boolean) {
-          loader.show()
-          content.hide()
+            loader.show()
+            content.hide()
         } else {
-          loader.hide()
-          content.show()
+            loader.hide()
+            content.show()
         }
-      },
+    },
 
-      renderTasks: async () => {
+    renderTasks: async () => {
         // Load the total task count from the blockchain
         const taskCount = await App.todoList.taskCount()
         const $taskTemplate = $('.taskTemplate')
@@ -98,7 +98,14 @@ App = {
             // Show the task
             $newTaskTemplate.show()
         }
-      }
+      },
+
+    createTask: async () => {
+        App.setLoading(true)
+        const content = $('#newTask').val()
+        await App.todoList.createTask(content,{from:App.account})
+        window.location.reload()
+    },
     
 }
 
