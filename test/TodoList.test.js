@@ -30,5 +30,5 @@ contract('TodoList', (accounts) => {
         assert.equal(event.id.toNumber(), 2)
         assert.equal(event.content, 'A new task')
         assert.equal(event.completed, false)
-      })
+    })
 })
