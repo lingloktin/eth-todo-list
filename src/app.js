@@ -36,24 +36,7 @@ App = {
         App.todoList = await App.contracts.TodoList.deployed()
         console.log("App.todoList: ")
         console.log(App.todoList)
-    },
-
-    render: async() => {
-        // prevent double render
-        if (App.laoding) {
-            return 
-        }
-
-        App.setLoading(true)
-
-        // Render Account
-        $('#account').html(App.account)
-
-        // Render Tasks
-        await App.renderTasks()
-
-        App.setLoading(false)
-    },
+    },    
 
     setLoading: (boolean) => {
         App.loading = boolean
@@ -103,8 +86,32 @@ App = {
     createTask: async () => {
         App.setLoading(true)
         const content = $('#newTask').val()
-        await App.todoList.createTask(content,{from:App.account})
+        await App.todoList.createTask(content, {from:App.account})
         window.location.reload()
+    },
+
+    toggleCompleted: async (e) => {
+        App.setLoading(true)
+        const taskId = e.target.name
+        await App.todoList.toggleCompleted(taskId, {from:App.account})
+        window.location.reload()
+    },
+
+    render: async() => {
+        // prevent double render
+        if (App.laoding) {
+            return 
+        }
+
+        App.setLoading(true)
+
+        // Render Account
+        $('#account').html(App.account)
+
+        // Render Tasks
+        await App.renderTasks()
+
+        App.setLoading(false)
     },
     
 }
