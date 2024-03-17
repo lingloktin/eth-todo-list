@@ -4,41 +4,54 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Dapp University | Todo List</title>
+    <title>Todo List | ETH </title>
 
-    <!-- Bootstrap -->
     <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <style>
-      main {
-        margin-top: 60px;
-      }
-
-      #content {
-        display: none;
-      }
-
-      form {
-        width: 350px;
-        margin-bottom: 10px;
-      }
-
-      ul {
-        margin-bottom: 0px;
-      }
-
-      #completedTaskList .content {
-        color: grey;
-        text-decoration: line-through;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        #content {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .list-unstyled {
+            list-style: none;
+            padding: 0;
+        }
+        .taskTemplate {
+            display: none;
+        }
+        .taskTemplate label {
+            display: block;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .taskTemplate label:hover {
+            background-color: #f4f4f4;
+        }
+        .taskTemplate input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        #completedTaskList .content {
+            color: grey;
+            text-decoration: line-through;
+        }
     </style>
   </head>
   <body>
@@ -58,21 +71,24 @@
             <p class="text-center">Loading...</p>
           </div>
           <div id="content">
-            <form onSubmit="App.createTask(); return false;">
-              <input id="newTask" type="text" class="form-control" placeholder="Add task..." required>
-              <input type="submit" hidden="">
+            <form class="input-group mb-3" onsubmit="App.createTask(); return false;">
+              <input id="newTask" type="text" class="form-control" placeholder="Add a new task..." required>
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Add</button>
+              </div>
             </form>
             <ul id="taskList" class="list-unstyled">
-              <div class="taskTemplate" class="checkbox" style="display: none">
-                <label>
-                  <input type="checkbox" />
-                  <span class="content">Task content goes here...</span>
-                </label>
-              </div>
+                <div class="taskTemplate" class="checkbox" style="display: none">
+                    <label>
+                        <input type="checkbox" />
+                        <span class="content">Task content goes here...</span>
+                    </label>
+                </div>
             </ul>
             <ul id="completedTaskList" class="list-unstyled">
             </ul>
-          </div>
+        </div>
+          
         </main>
       </div>
     </div>
