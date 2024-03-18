@@ -9,10 +9,6 @@ ETH To Do List is a simple web application that leverages the Ethereum blockchai
 - [Installation and Setup](#installation-and-setup)
 - [Usage](#usage)
 - [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-- [Future Improvements](#future-improvements)
 
 ## Installation and Setup
 
