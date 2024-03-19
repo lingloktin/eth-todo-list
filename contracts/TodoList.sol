@@ -2,6 +2,9 @@ pragma solidity ^0.5.0;
 
 contract TodoList {
     uint public taskCount = 0;
+    uint public taskId = 0;
+    uint[] public activeIds;
+
 
     struct Task {
         uint id;
@@ -24,12 +27,36 @@ contract TodoList {
 
     constructor() public {
         createTask("Drink some water");
+        createTask("write a memo");
+        createTask("take holiday");
     }
-    
+
+    function getActiveIds() public view returns (uint[] memory) {
+        return activeIds;
+    }
+
+    function deleteTask(uint _id) public {
+        // Task memory _task = tasks[_id];
+        delete tasks[_id];
+        uint removeIndex = 0;
+        for(uint i = 0; i < activeIds.length; i++) {
+            if(activeIds[i] == _id) {
+                removeIndex = i;
+                break;
+            }
+        }
+        for(uint i = removeIndex+1; i < activeIds.length; i++) {
+            activeIds[i-1] = activeIds[i];
+        }
+        activeIds.pop();
+    }
+
     function createTask(string memory _content) public {
         taskCount ++;
-        tasks[taskCount] = Task(taskCount, _content, false);
-        emit TaskCreated(taskCount, _content, false);
+        taskId ++;
+        tasks[taskId] = Task(taskId, _content, false);
+        activeIds.push(taskId);
+        emit TaskCreated(taskId, _content, false);
     }
 
     function toggleCompleted(uint _id) public {
