@@ -27,8 +27,8 @@ contract TodoList {
 
     constructor() public {
         createTask("Drink some water");
-        createTask("write a memo");
-        createTask("take holiday");
+        createTask("Buy groceries for the week");
+        createTask("Complete assignment");
     }
 
     function getActiveIds() public view returns (uint[] memory) {
