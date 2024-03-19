@@ -3,7 +3,6 @@ App = {
     loading: false,
 
     initialize: async () => {
-        console.log('app loading')
         await App.loadWeb3()
         await App.loadContract()
         await App.render()      
@@ -34,8 +33,6 @@ App = {
 
         // Hydrate the smart contract with values from the blockchain
         App.todoList = await App.contracts.TodoList.deployed()
-        console.log("App.todoList: ")
-        console.log(App.todoList)
     },    
 
     setLoading: (boolean) => {
@@ -52,11 +49,11 @@ App = {
     },
 
     renderTasks: async () => {
-        // Load the total task count from the blockchain
-        const taskCount = await App.todoList.taskCount()
         const $taskTemplate = $('.taskTemplate')
-
-        for (var i = 1; i <= taskCount; i++) {
+        
+        const activeIds = await App.todoList.getActiveIds();
+        for (const id of activeIds) {
+            const i = id.toNumber()
             // Fetch the task data from the blockchain
             const task = await App.todoList.tasks(i)
             const taskId = task[0].toNumber()
@@ -70,6 +67,9 @@ App = {
                             .prop('name', taskId)
                             .prop('checked', taskCompleted)
                             .on('click', App.toggleCompleted)
+            $newTaskTemplate.find('.close')
+                            .prop('name', taskId)
+                            .on('click', App.deleteTask)
         
             // Put the task in the correct list
             if (taskCompleted) {
@@ -90,6 +90,14 @@ App = {
         window.location.reload()
     },
 
+    
+    deleteTask: async (e) => {
+        App.setLoading(true);
+        const taskId = $(e.target).closest('.close').prop('name');
+        await App.todoList.deleteTask(taskId, {from: App.account});
+        window.location.reload();
+    },
+
     toggleCompleted: async (e) => {
         App.setLoading(true)
         const taskId = e.target.name
@@ -97,9 +105,23 @@ App = {
         window.location.reload()
     },
 
+    logEntireTaskList: async () => {
+        const activeIds = await App.todoList.getActiveIds();
+        activeIds.forEach(async (id) => {
+            const task = await App.todoList.tasks(id.toNumber())
+            const taskId = task[0].toNumber()
+            const taskContent = task[1]
+            const taskCompleted = task[2]
+            console.log("taskid:" + taskId)
+            console.log("taskContent: " + taskContent)
+            console.log("taskCompleted: " + taskCompleted)
+        })
+
+    },
+
     render: async() => {
         // prevent double render
-        if (App.laoding) {
+        if (App.loading) {
             return 
         }
 
@@ -111,7 +133,10 @@ App = {
         // Render Tasks
         await App.renderTasks()
 
+        // for debug
+        // App.logEntireTaskList()
         App.setLoading(false)
+        
     },
     
 }
