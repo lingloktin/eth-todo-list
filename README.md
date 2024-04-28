@@ -20,6 +20,10 @@ ETH To Do List is a simple web application that leverages the Ethereum blockchai
    - Migrate the contracts to your local blockchain using `truffle migrate`.
 5. **Run the Web Server**: Start the development server with `npm run dev`.
 6. **Browse the App**: Open your web browser and navigate to `http://localhost:3000` (or the port specified in your development server configuration) to interact with the application.
+7. **Set Up Metamask**:
+   - Add the local Ganache network to Metamask.
+   - Import the first account in the network to Metamask using private key.
+   - If the set up is successful, the address of the account will be displayed on the top right corner of the app.
 
 ## Usage
 
