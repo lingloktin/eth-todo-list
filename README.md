@@ -1,8 +1,8 @@
 # ETH To Do List
 
-## Description
+## Overview
 
-ETH To Do List is a simple web application that leverages the Ethereum blockchain to create, manage, and track tasks. This project serves as a practical exploration of how blockchain technology can be integrated into everyday applications, providing a foundation for understanding and experimenting with decentralized applications (DApps).
+ETH To Do List is a decentralized application (DApp) that leverages the Ethereum blockchain to create, manage, and track tasks. This project is a practical exploration of how blockchain technology can be integrated into everyday applications, providing a foundation for understanding and experimenting with decentralized applications (DApps).
 
 ## Table of Contents
 
@@ -12,15 +12,22 @@ ETH To Do List is a simple web application that leverages the Ethereum blockchai
 
 ## Installation and Setup
 
-1. **Download Necessary Tools**: Ensure you have Node.js, Ganache, and the Metamask extension installed on your machine.
-2. **Clone the Project**: Use the command `git clone https://github.com/lingloktin/eth-todo-list.git` to clone the repository to your local machine.
-3. **Install Dependencies**: Navigate to the project directory and run `npm install` to install all required dependencies.
-4. **Compile and Migrate**:
+### Prerequisites
+
+- Node.js
+- Ganache
+- Metamask extension
+
+### Steps
+
+1. **Clone the Project**: Use the command `git clone https://github.com/yourusername/eth-todo-list.git` to clone the repository to your local machine.
+2. **Install Dependencies**: Navigate to the project directory and run `npm install` to install all required dependencies.
+3. **Compile and Migrate**:
    - Compile the smart contracts with `truffle compile`.
    - Migrate the contracts to your local blockchain using `truffle migrate`.
-5. **Run the Web Server**: Start the development server with `npm run dev`.
-6. **Browse the App**: Open your web browser and navigate to `http://localhost:3000` (or the port specified in your development server configuration) to interact with the application.
-7. **Set Up Metamask**:
+4. **Run the Web Server**: Start the development server with `npm run dev`.
+5. **Browse the App**: Open your web browser and navigate to `http://localhost:3000` (or the port specified in your development server configuration) to interact with the application.
+6. **Set Up Metamask**:
    - Add the local Ganache network to Metamask.
    - Import the first account in the network to Metamask using private key.
    - If the set up is successful, the address of the account will be displayed on the top right corner of the app.
